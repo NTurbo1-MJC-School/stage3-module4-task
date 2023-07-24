@@ -14,28 +14,28 @@ import javax.sql.DataSource;
 @EntityScan(basePackages = "com.mjc.school.repository.model")
 public class RepositoryConfig {
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em
-                = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("com.baeldung.persistence.model");
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//        LocalContainerEntityManagerFactoryBean em
+//                = new LocalContainerEntityManagerFactoryBean();
+//        //em.setDataSource(dataSource());
+//        em.setPackagesToScan("com.mjc.school.repository.model");
+//
+//        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        em.setJpaVendorAdapter(vendorAdapter);
+//        //em.setJpaProperties(additionalProperties());
+//
+//        return em;
+//    }
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        //em.setJpaProperties(additionalProperties());
-
-        return em;
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/mod3task");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("Nn1234)");
-
-        return dataSource;
-    }
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("org.postgresql.Driver");
+//        dataSource.setUrl("jdbc:postgresql://localhost:5432/mod3task");
+//        dataSource.setUsername("postgres");
+//        dataSource.setPassword("Nn1234)");
+//
+//        return dataSource;
+//    }
 }

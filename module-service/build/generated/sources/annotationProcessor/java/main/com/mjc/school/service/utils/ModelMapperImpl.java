@@ -16,7 +16,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-20T03:30:00+0600",
+    date = "2023-07-25T00:37:26+0600",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.4.2.jar, environment: Java 17.0.4.1 (Oracle Corporation)"
 )
 public class ModelMapperImpl implements ModelMapper {

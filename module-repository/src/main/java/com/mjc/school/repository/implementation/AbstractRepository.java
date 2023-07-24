@@ -5,10 +5,7 @@ import com.mjc.school.repository.model.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.metamodel.EntityType;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
