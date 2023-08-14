@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BaseController<T, R, K> {
 
-    List<R> readAll();
+    List<R> readAll(String sort, int page);
 
     R readById(K id);
 
@@ -12,5 +12,5 @@ public interface BaseController<T, R, K> {
 
     R update(T updateRequest);
 
-    boolean deleteById(K id);
+    void deleteById(K id);
 }
