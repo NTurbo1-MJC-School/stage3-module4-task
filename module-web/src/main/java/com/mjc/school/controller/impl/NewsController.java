@@ -52,7 +52,8 @@ public class NewsController implements NewsControllerInterface {
   @CommandHandler("10")
   @PutMapping("/{id:\\d+}")
   @ResponseStatus(HttpStatus.OK)
-  public NewsDtoResponse update(@RequestBody NewsDtoRequest dtoRequest) {
+  public NewsDtoResponse update(@PathVariable Long id,
+                                @RequestBody NewsDtoRequest dtoRequest) {
     return newsService.update(dtoRequest);
   }
 

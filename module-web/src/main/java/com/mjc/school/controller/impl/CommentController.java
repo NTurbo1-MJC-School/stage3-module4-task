@@ -55,7 +55,8 @@ public class CommentController implements CommentControllerInterface {
     @CommandHandler("21")
     @PutMapping("/{id:\\d+}")
     @ResponseStatus(HttpStatus.OK)
-    public CommentDtoResponse update(@RequestBody CommentDtoRequest updateRequest) {
+    public CommentDtoResponse update(@PathVariable Long id,
+                                     @RequestBody CommentDtoRequest updateRequest) {
         return commentService.update(updateRequest);
     }
 

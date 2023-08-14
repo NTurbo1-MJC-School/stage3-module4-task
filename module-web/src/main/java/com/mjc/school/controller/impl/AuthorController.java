@@ -52,7 +52,8 @@ public class AuthorController implements AuthorControllerInterface {
   @CommandHandler("11")
   @PutMapping("/{id:\\d+}")
   @ResponseStatus(HttpStatus.OK)
-  public AuthorDtoResponse update(@RequestBody AuthorDtoRequest dtoRequest) {
+  public AuthorDtoResponse update(@PathVariable Long id,
+                                  @RequestBody AuthorDtoRequest dtoRequest) {
     return authorService.update(dtoRequest);
   }
 

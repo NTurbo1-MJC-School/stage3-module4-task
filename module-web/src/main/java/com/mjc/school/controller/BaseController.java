@@ -10,7 +10,7 @@ public interface BaseController<T, R, K> {
 
     R create(T createRequest);
 
-    R update(T updateRequest);
+    R update(K id, T updateRequest);
 
     void deleteById(K id);
 }

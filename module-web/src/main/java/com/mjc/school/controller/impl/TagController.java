@@ -52,7 +52,8 @@ public class TagController implements TagControllerInterface {
     @CommandHandler("12")
     @PutMapping("/{id}:\\d+")
     @ResponseStatus(HttpStatus.OK)
-    public TagDtoResponse update(@RequestBody TagDtoRequest dtoRequest) {
+    public TagDtoResponse update(@PathVariable Long id,
+                                 @RequestBody TagDtoRequest dtoRequest) {
         return tagService.update(dtoRequest);
     }
 
