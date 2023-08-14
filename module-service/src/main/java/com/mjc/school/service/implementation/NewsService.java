@@ -68,7 +68,7 @@ public class NewsService implements NewsServiceInterface {
   @Override
   public NewsDtoResponse create(NewsDtoRequest dtoRequest) {
     newsValidator.validateNewsDto(dtoRequest);
-    NewsEntity entity = mapper.dtoToAuthorEntity(dtoRequest);
+    NewsEntity entity = mapper.dtoToNewsEntity(dtoRequest);
 
     entity.setAuthor(authorRepository.readById(dtoRequest.authorId()).get());
 
@@ -87,7 +87,6 @@ public class NewsService implements NewsServiceInterface {
     LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     entity.setCreateDate(date);
     entity.setLastUpdatedDate(date);
-    entity.setAuthor(authorRepository.readById(dtoRequest.authorId()).get());
     NewsEntity newsEntity = newsRepository.create(entity);
     return mapper.newsEntityToDto(newsEntity);
   }
@@ -97,7 +96,7 @@ public class NewsService implements NewsServiceInterface {
     newsValidator.validateNewsId(dtoRequest.id());
     newsValidator.validateNewsDto(dtoRequest);
     if (newsRepository.existById(dtoRequest.id())) {
-      NewsEntity entity = mapper.dtoToAuthorEntity(dtoRequest);
+      NewsEntity entity = mapper.dtoToNewsEntity(dtoRequest);
       entity.setAuthor(authorRepository.readById(dtoRequest.authorId()).get());
 
       if (dtoRequest.tagIds() != null) {
@@ -115,7 +114,6 @@ public class NewsService implements NewsServiceInterface {
       LocalDateTime date = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
       entity.setCreateDate(date);
       entity.setLastUpdatedDate(date);
-      entity.setAuthor(authorRepository.readById(dtoRequest.authorId()).get());
 
       NewsEntity newsEntity = newsRepository.update(entity);
       return mapper.newsEntityToDto(newsEntity);

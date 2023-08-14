@@ -26,6 +26,11 @@ public class CommandReceiver {
     private Command updateTagCommand;
     private Command getAuthorByNewsIdCommand;
     private Command getTagsByNewsIdCommand;
+    private Command createCommentCommand;
+    private Command deleteCommentCommand;
+    private Command getAllCommentsCommand;
+    private Command getCommentByIdCommand;
+    private Command updateCommentCommand;
     private Command exitCommand;
     private Command printMainMenuCommand;
 
@@ -48,7 +53,12 @@ public class CommandReceiver {
                            @Qualifier("getAuthorByNewsIdCommand") Command getAuthorByNewsIdCommand,
                            @Qualifier("getTagsByNewsIdCommand") Command getTagsByNewsIdCommand,
                            @Qualifier("exitCommand") Command exitCommand,
-                           @Qualifier("printMainMenuCommand") Command printMainMenuCommand) {
+                           @Qualifier("printMainMenuCommand") Command printMainMenuCommand,
+                           @Qualifier("createCommentCommand") Command createCommentCommand,
+                           @Qualifier("deleteCommentCommand") Command deleteCommentCommand,
+                           @Qualifier("getAllCommentsCommand") Command getAllCommentsCommand,
+                           @Qualifier("getCommentByIdCommand") Command getCommentByIdCommand,
+                           @Qualifier("updateCommentCommand") Command updateCommentCommand) {
         this.createAuthorCommand = createAuthorCommand;
         this.createNewsCommand = createNewsCommand;
         this.createTagCommand = createTagCommand;
@@ -68,6 +78,11 @@ public class CommandReceiver {
         this.getTagsByNewsIdCommand = getTagsByNewsIdCommand;
         this.exitCommand = exitCommand;
         this.printMainMenuCommand = printMainMenuCommand;
+        this.createCommentCommand = createCommentCommand;
+        this.deleteCommentCommand = deleteCommentCommand;
+        this.getAllCommentsCommand = getAllCommentsCommand;
+        this.getCommentByIdCommand = getCommentByIdCommand;
+        this.updateCommentCommand = updateCommentCommand;
     }
 
     public void createAuthor() {
@@ -136,6 +151,22 @@ public class CommandReceiver {
 
     public void getTagsByNewsId() {
         getTagsByNewsIdCommand.execute();
+    }
+
+    public void createComment() {
+        createCommentCommand.execute();
+    }
+    public void deleteComment() {
+        deleteCommentCommand.execute();
+    }
+    public void getAllComments() {
+        getAllCommentsCommand.execute();
+    }
+    public void getCommentById() {
+        getCommentByIdCommand.execute();
+    }
+    public void updateComment() {
+        updateCommentCommand.execute();
     }
 
     public void exit() {

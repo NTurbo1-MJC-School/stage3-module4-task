@@ -8,11 +8,14 @@ import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(value = "/news", consumes = {"application/JSON"}, produces = {"application/JSON", "application/XML"})
 public class NewsController implements NewsControllerInterface {
 
   private final NewsServiceInterface newsService;
@@ -23,6 +26,8 @@ public class NewsController implements NewsControllerInterface {
   }
 
   @CommandHandler("1")
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
   public List<NewsDtoResponse> readAll() {
     List<NewsDtoResponse> news = newsService.readAll();
     if (news.isEmpty()) {
@@ -32,22 +37,30 @@ public class NewsController implements NewsControllerInterface {
   }
 
   @CommandHandler("4")
-  public NewsDtoResponse readById(Long newsId) {
-    return newsService.readById(newsId);
+  @GetMapping("/{id:\\d+}")
+  @ResponseStatus(HttpStatus.OK)
+  public NewsDtoResponse readById(@PathVariable Long id) {
+    return newsService.readById(id);
   }
 
   @CommandHandler("7")
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
   public NewsDtoResponse create(NewsDtoRequest dtoRequest) {
     return newsService.create(dtoRequest);
   }
 
   @CommandHandler("10")
+  @PutMapping("/{id:\\d+}")
+  @ResponseStatus(HttpStatus.OK)
   public NewsDtoResponse update(NewsDtoRequest dtoRequest) {
     return newsService.update(dtoRequest);
   }
 
   @CommandHandler("13")
-  public boolean deleteById(Long newsId) {
-    return newsService.deleteById(newsId);
+  @DeleteMapping("/{id:\\d+}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public boolean deleteById(@PathVariable Long id) {
+    return newsService.deleteById(id);
   }
 }

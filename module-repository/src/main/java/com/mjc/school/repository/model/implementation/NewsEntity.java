@@ -1,6 +1,8 @@
 package com.mjc.school.repository.model.implementation;
 
 import com.mjc.school.repository.model.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "News")
+@Getter
+@Setter
 public class NewsEntity implements BaseEntity<Long> {
 
     @Id
@@ -33,6 +37,10 @@ public class NewsEntity implements BaseEntity<Long> {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private List<TagEntity> tags;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "news_id")
+    private List<CommentEntity> comments;
 
     public NewsEntity() {}
 
@@ -96,6 +104,14 @@ public class NewsEntity implements BaseEntity<Long> {
 
     public List<TagEntity> getTags() {
         return tags;
+    }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
     }
 
     public void setAuthor(AuthorEntity author) {

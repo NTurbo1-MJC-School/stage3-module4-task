@@ -15,6 +15,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class AuthorService implements AuthorServiceInterface {
     private ModelMapper mapper = Mappers.getMapper(ModelMapper.class);
 
     @Autowired
-    public AuthorService(AuthorRepositoryInterface authorRepository,
+    public AuthorService(@Qualifier("authorRepository") AuthorRepositoryInterface authorRepository,
                          @Qualifier("newsRepository") NewsRepositoryInterface newsRepository,
                          AuthorValidator authorValidator,
                          NewsValidator newsValidator) {

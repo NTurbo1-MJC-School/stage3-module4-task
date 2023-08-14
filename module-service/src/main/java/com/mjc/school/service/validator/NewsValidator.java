@@ -1,24 +1,21 @@
 package com.mjc.school.service.validator;
 
-import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.model.implementation.AuthorEntity;
-import com.mjc.school.repository.model.implementation.NewsEntity;
-import com.mjc.school.repository.model.implementation.TagEntity;
+import com.mjc.school.repository.interfaces.NewsRepositoryInterface;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.exceptions.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import static com.mjc.school.service.exceptions.ServiceErrorCode.*;
+import static com.mjc.school.service.exceptions.ServiceErrorCode.NEWS_ID_DOES_NOT_EXIST;
 
 @Component
 public class NewsValidator extends Validator{
-  private final BaseRepository<NewsEntity, Long> newsRepository;
+  private final NewsRepositoryInterface newsRepository;
   private final AuthorValidator authorValidator;
 
   @Autowired
-  public NewsValidator(@Qualifier("newsRepository") BaseRepository newsRepository,
+  public NewsValidator(@Qualifier("newsRepository") NewsRepositoryInterface newsRepository,
                        AuthorValidator authorValidator) {
     super();
     this.newsRepository = newsRepository;

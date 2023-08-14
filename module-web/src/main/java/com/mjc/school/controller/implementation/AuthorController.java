@@ -7,11 +7,13 @@ import com.mjc.school.service.dto.AuthorDtoResponse;
 import com.mjc.school.service.interfaces.AuthorServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(value = "/authors", consumes = {"application/JSON"}, produces = {"application/JSON", "application/XML"})
 public class AuthorController implements AuthorControllerInterface {
 
   private final AuthorServiceInterface authorService;
@@ -22,6 +24,8 @@ public class AuthorController implements AuthorControllerInterface {
   }
 
   @CommandHandler("2")
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
   public List<AuthorDtoResponse> readAll() {
     List<AuthorDtoResponse> authors = authorService.readAll();
     if (authors.isEmpty()) {
@@ -31,27 +35,37 @@ public class AuthorController implements AuthorControllerInterface {
   }
 
   @CommandHandler("5")
-  public AuthorDtoResponse readById(Long newsId) {
-      return authorService.readById(newsId);
+  @GetMapping("/{id:\\d+}")
+  @ResponseStatus(HttpStatus.OK)
+  public AuthorDtoResponse readById(@PathVariable Long id) {
+      return authorService.readById(id);
   }
 
   @CommandHandler("8")
-  public AuthorDtoResponse create(AuthorDtoRequest dtoRequest) {
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  public AuthorDtoResponse create(@RequestBody AuthorDtoRequest dtoRequest) {
     return authorService.create(dtoRequest);
   }
 
   @CommandHandler("11")
-  public AuthorDtoResponse update(AuthorDtoRequest dtoRequest) {
+  @PutMapping("/{id:\\d+}")
+  @ResponseStatus(HttpStatus.OK)
+  public AuthorDtoResponse update(@RequestBody AuthorDtoRequest dtoRequest) {
     return authorService.update(dtoRequest);
   }
 
   @CommandHandler("14")
-  public boolean deleteById(Long newsId) {
-    return authorService.deleteById(newsId);
+  @DeleteMapping("/{id:\\d+}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public boolean deleteById(@PathVariable Long id) {
+    return authorService.deleteById(id);
   }
 
   @CommandHandler("16")
-  public AuthorDtoResponse readByNewsId(Long newsId) {
+  @GetMapping("/{newsId:\\d+}")
+  @ResponseStatus(HttpStatus.OK)
+  public AuthorDtoResponse readByNewsId(@PathVariable Long newsId) {
     return authorService.readByNewsId(newsId);
   }
 }

@@ -1,10 +1,13 @@
 package com.mjc.school.service.utils;
 
 import com.mjc.school.repository.model.implementation.AuthorEntity;
+import com.mjc.school.repository.model.implementation.CommentEntity;
 import com.mjc.school.repository.model.implementation.NewsEntity;
 import com.mjc.school.repository.model.implementation.TagEntity;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
+import com.mjc.school.service.dto.CommentDtoRequest;
+import com.mjc.school.service.dto.CommentDtoResponse;
 import com.mjc.school.service.dto.NewsDtoRequest;
 import com.mjc.school.service.dto.NewsDtoResponse;
 import com.mjc.school.service.dto.TagDtoRequest;
@@ -16,7 +19,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-25T00:37:26+0600",
+    date = "2023-08-09T23:49:28+0600",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.4.2.jar, environment: Java 17.0.4.1 (Oracle Corporation)"
 )
 public class ModelMapperImpl implements ModelMapper {
@@ -58,6 +61,20 @@ public class ModelMapperImpl implements ModelMapper {
         List<TagDtoResponse> list = new ArrayList<TagDtoResponse>( tagEntityList.size() );
         for ( TagEntity tagEntity : tagEntityList ) {
             list.add( tagEntityToDto( tagEntity ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<CommentDtoResponse> commentEntityListToDtoList(List<CommentEntity> commentEntityList) {
+        if ( commentEntityList == null ) {
+            return null;
+        }
+
+        List<CommentDtoResponse> list = new ArrayList<CommentDtoResponse>( commentEntityList.size() );
+        for ( CommentEntity commentEntity : commentEntityList ) {
+            list.add( commentEntityToDto( commentEntity ) );
         }
 
         return list;
@@ -126,7 +143,30 @@ public class ModelMapperImpl implements ModelMapper {
     }
 
     @Override
-    public NewsEntity dtoToAuthorEntity(NewsDtoRequest newsDtoRequest) {
+    public CommentDtoResponse commentEntityToDto(CommentEntity commentEntity) {
+        if ( commentEntity == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String content = null;
+        LocalDateTime created = null;
+        LocalDateTime modified = null;
+
+        id = commentEntity.getId();
+        content = commentEntity.getContent();
+        created = commentEntity.getCreated();
+        modified = commentEntity.getModified();
+
+        Long newsId = null;
+
+        CommentDtoResponse commentDtoResponse = new CommentDtoResponse( id, content, newsId, created, modified );
+
+        return commentDtoResponse;
+    }
+
+    @Override
+    public NewsEntity dtoToNewsEntity(NewsDtoRequest newsDtoRequest) {
         if ( newsDtoRequest == null ) {
             return null;
         }
@@ -166,5 +206,21 @@ public class ModelMapperImpl implements ModelMapper {
         tagEntity.setName( tagDtoRequest.name() );
 
         return tagEntity;
+    }
+
+    @Override
+    public CommentEntity dtoToCommentEntity(CommentDtoRequest commentDtoRequest) {
+        if ( commentDtoRequest == null ) {
+            return null;
+        }
+
+        CommentEntity commentEntity = new CommentEntity();
+
+        commentEntity.setId( commentDtoRequest.id() );
+        commentEntity.setContent( commentDtoRequest.content() );
+        commentEntity.setCreated( commentDtoRequest.created() );
+        commentEntity.setModified( commentDtoRequest.modified() );
+
+        return commentEntity;
     }
 }

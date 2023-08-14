@@ -18,6 +18,11 @@ public enum Operations {
   REMOVE_TAG_BY_ID(15, "Remove tag by id."),
   GET_AUTHOR_BY_NEWS_ID(16, "Get author by news id."),
   GET_TAG_BY_NEWS_ID(17, "Get tag by news id."),
+  GET_ALL_COMMENTS(18, "Get all comments."),
+  GET_COMMENT_BY_ID(19, "Get comment by id."),
+  CREATE_COMMENT(20, "Create comment."),
+  UPDATE_COMMENT(21, "Update comment."),
+  REMOVE_COMMENT_BY_ID(22, "Remove comment by id."),
   EXIT(0, "Exit.");
 
   private final Integer operationNumber;

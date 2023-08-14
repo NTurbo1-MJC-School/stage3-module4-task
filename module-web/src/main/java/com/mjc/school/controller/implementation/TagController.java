@@ -8,11 +8,14 @@ import com.mjc.school.service.dto.TagDtoResponse;
 import com.mjc.school.service.interfaces.TagServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(value = "/tags", consumes = {"application/JSON"}, produces = {"application/JSON", "application/XML"})
 public class TagController implements TagControllerInterface {
 
     private final TagServiceInterface tagService;
@@ -23,6 +26,8 @@ public class TagController implements TagControllerInterface {
     }
 
     @CommandHandler("3")
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<TagDtoResponse> readAll() {
         List<TagDtoResponse> tags = tagService.readAll();
         if (tags.isEmpty()) {
@@ -32,27 +37,37 @@ public class TagController implements TagControllerInterface {
     }
 
     @CommandHandler("6")
-    public TagDtoResponse readById(Long tagId) {
-        return tagService.readById(tagId);
+    @GetMapping("/{id:\\d+}")
+    @ResponseStatus(HttpStatus.OK)
+    public TagDtoResponse readById(@PathVariable Long id) {
+        return tagService.readById(id);
     }
 
     @CommandHandler("9")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public TagDtoResponse create(TagDtoRequest dtoRequest) {
         return tagService.create(dtoRequest);
     }
 
     @CommandHandler("12")
+    @PutMapping("/{id}:\\d+")
+    @ResponseStatus(HttpStatus.OK)
     public TagDtoResponse update(TagDtoRequest dtoRequest) {
         return tagService.update(dtoRequest);
     }
 
     @CommandHandler("15")
-    public boolean deleteById(Long tagId) {
-        return tagService.deleteById(tagId);
+    @DeleteMapping("/{id:\\d+}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean deleteById(@PathVariable Long id) {
+        return tagService.deleteById(id);
     }
 
     @CommandHandler("17")
-    public List<TagDtoResponse> readByNewsId(Long newsId) {
+    @GetMapping("/{newsId:\\d+}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TagDtoResponse> readByNewsId(@PathVariable Long newsId) {
         return tagService.readByNewsId(newsId);
     }
 }

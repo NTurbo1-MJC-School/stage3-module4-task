@@ -1,6 +1,7 @@
 package com.mjc.school.service.validator;
 
 import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.interfaces.TagRepositoryInterface;
 import com.mjc.school.repository.model.implementation.TagEntity;
 import com.mjc.school.service.dto.TagDtoRequest;
 import com.mjc.school.service.exceptions.ValidatorException;
@@ -13,10 +14,10 @@ import static com.mjc.school.service.exceptions.ServiceErrorCode.TAG_ID_DOES_NOT
 @Component
 public class TagValidator extends Validator {
 
-    private final BaseRepository<TagEntity, Long> tagRepository;
+    private final TagRepositoryInterface tagRepository;
 
     @Autowired
-    public TagValidator(@Qualifier("tagRepository") BaseRepository tagRepository) {
+    public TagValidator(@Qualifier("tagRepository") TagRepositoryInterface tagRepository) {
         super();
         this.tagRepository = tagRepository;
     }

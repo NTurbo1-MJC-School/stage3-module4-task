@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TagRepositoryInterface extends BaseRepository<TagEntity, Long> {
 
-    abstract public List<TagEntity> readByNewsId(Long newsId);
+    List<TagEntity> readByNewsId(Long newsId);
 }

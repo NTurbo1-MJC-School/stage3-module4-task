@@ -1,6 +1,7 @@
 package com.mjc.school.service.validator;
 
 import com.mjc.school.repository.BaseRepository;
+import com.mjc.school.repository.interfaces.AuthorRepositoryInterface;
 import com.mjc.school.repository.model.implementation.AuthorEntity;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.NewsDtoRequest;
@@ -15,9 +16,9 @@ import static com.mjc.school.service.exceptions.ServiceErrorCode.VALIDATE_STRING
 @Component
 public class AuthorValidator extends Validator {
 
-    private final BaseRepository<AuthorEntity, Long> authorRepository;
+    private final AuthorRepositoryInterface authorRepository;
 
-    public AuthorValidator(@Qualifier("authorRepository") BaseRepository authorRepository) {
+    public AuthorValidator(@Qualifier("authorRepository") AuthorRepositoryInterface authorRepository) {
         this.authorRepository = authorRepository;
     }
 

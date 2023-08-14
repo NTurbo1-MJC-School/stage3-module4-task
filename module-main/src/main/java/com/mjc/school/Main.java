@@ -51,6 +51,11 @@ public class Main implements CommandLineRunner {
           case "15" -> commandReceiver.deleteTag();
           case "16" -> commandReceiver.getAuthorByNewsId();
           case "17" -> commandReceiver.getTagsByNewsId();
+          case "18" -> commandReceiver.getAllComments();
+          case "19" -> commandReceiver.getCommentById();
+          case "20" -> commandReceiver.createComment();
+          case "21" -> commandReceiver.updateComment();
+          case "22" -> commandReceiver.deleteComment();
           case "0" -> commandReceiver.exit();
           default -> System.out.println(COMMAND_NOT_FOUND);
         }

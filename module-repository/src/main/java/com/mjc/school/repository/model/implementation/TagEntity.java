@@ -1,12 +1,16 @@
 package com.mjc.school.repository.model.implementation;
 
 import com.mjc.school.repository.model.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Tag")
+@Getter
+@Setter
 public class TagEntity implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

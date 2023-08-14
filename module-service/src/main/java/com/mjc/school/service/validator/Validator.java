@@ -21,6 +21,10 @@ public abstract class Validator {
     static final String TAG_NAME = "Tag name";
     static final Integer TAG_NAME_MIN_LENGTH = 3;
     static final Integer TAG_NAME_MAX_LENGTH = 15;
+    static final String COMMENT_ID = "Comment id";
+    static final String COMMENT_CONTENT = "Comment content";
+    static final Integer COMMENT_CONTENT_MIN_LENGTH = 5;
+    static final Integer COMMENT_CONTENT_MAX_LENGTH = 255;
     public Validator() {}
 
     public void validateNumber(Long id, String parameter) {

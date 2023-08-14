@@ -1,6 +1,8 @@
 package com.mjc.school.repository.model.implementation;
 
 import com.mjc.school.repository.model.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -10,7 +12,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Author")
-@EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
 public class AuthorEntity implements BaseEntity<Long> {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
